@@ -3,10 +3,19 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <cassert>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <sstream>
+#include <iterator>
 #include "VigeneresCipher.h"
 
 VigeneresCipher::VigeneresCipher() {
     initTable();
+    //generateKey(4, "key.txt");
+    generateCipherText("key.txt", "cipher.txt");
 }
 
 void VigeneresCipher::initTable() {
@@ -25,9 +34,7 @@ void VigeneresCipher::initTable() {
         }
         index++;
     }
-
-    printTable();
-
+    //printTable();
 }
 
 void VigeneresCipher::printTable() {
@@ -39,4 +46,45 @@ void VigeneresCipher::printTable() {
         }
         cout << endl;
     }
+}
+
+void VigeneresCipher::generateKey(int length, string name) {
+    srand((unsigned) time(0));
+    ofstream fout(name.c_str());
+    assert(fout.is_open());
+    for(unsigned i = 0 ; i<length ; i++){
+        fout << (rand()%26) + 1;
+        if( i < length -1){fout << ",";}
+    }
+    fout.close();
+}
+
+void VigeneresCipher::generateCipherText(string keyname,string outputname) {
+    vector <string> keyvalues;
+    ofstream fout(outputname.c_str());
+    assert(fout.is_open());
+    ifstream fin(keyname);
+    assert(fin.is_open());
+    string keytext;
+    getline(fin, keytext);
+
+    unsigned beginning = 0;
+    unsigned counter = 1;
+    for( unsigned i = 0 ; i < keytext.size() ; i++) {
+        if (keytext.at(i) == ',') {
+            keyvalues.push_back(keytext.substr(beginning, counter - 1));
+            beginning = i + 1;
+            counter = 0;
+        }
+        counter++;
+
+    }
+    keyvalues.push_back(keytext.substr(beginning, keytext.size()));
+    cout << keyvalues.at(0) << endl;
+    cout << keyvalues.at(1) << endl;
+    cout << keyvalues.at(2) << endl;
+    cout << keyvalues.at(3) << endl;
+
+    fin.close();
+    fout.close();
 }

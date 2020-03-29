@@ -18,10 +18,12 @@ class VigeneresCipher {
 
 public:
     VigeneresCipher();
-
 private:
     void initTable();
     void printTable();
+    void generateKey(int, string);
+    //TODO: pass by reference for generateKey?
+    void generateCipherText(string, string);
     string table[HEIGHT][WIDTH];
 };
 
