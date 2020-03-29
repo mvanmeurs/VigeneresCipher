@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.cpp
+iostream
+-
+VigeneresCipher.h
+C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.h
+
+C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.h
+iostream
+-
+

@@ -122,6 +122,33 @@ Vigeneres_Cipher/fast:
 	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/build
 .PHONY : Vigeneres_Cipher/fast
 
+VigeneresCipher.obj: VigeneresCipher.cpp.obj
+
+.PHONY : VigeneresCipher.obj
+
+# target to build an object file
+VigeneresCipher.cpp.obj:
+	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/VigeneresCipher.cpp.obj
+.PHONY : VigeneresCipher.cpp.obj
+
+VigeneresCipher.i: VigeneresCipher.cpp.i
+
+.PHONY : VigeneresCipher.i
+
+# target to preprocess a source file
+VigeneresCipher.cpp.i:
+	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/VigeneresCipher.cpp.i
+.PHONY : VigeneresCipher.cpp.i
+
+VigeneresCipher.s: VigeneresCipher.cpp.s
+
+.PHONY : VigeneresCipher.s
+
+# target to generate assembly for a file
+VigeneresCipher.cpp.s:
+	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/VigeneresCipher.cpp.s
+.PHONY : VigeneresCipher.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -158,6 +185,9 @@ help:
 	@echo ... Vigeneres_Cipher
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... VigeneresCipher.obj
+	@echo ... VigeneresCipher.i
+	@echo ... VigeneresCipher.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

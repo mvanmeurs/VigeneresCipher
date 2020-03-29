@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.cpp">
+			<Option target="Vigeneres_Cipher"/>
+		</Unit>
+		<Unit filename="C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.h">
+			<Option target="Vigeneres_Cipher"/>
+		</Unit>
 		<Unit filename="C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/main.cpp">
 			<Option target="Vigeneres_Cipher"/>
 		</Unit>
