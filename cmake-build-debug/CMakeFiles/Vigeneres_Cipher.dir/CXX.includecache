@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.cpp
+C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.cpp
 iostream
 -
 fstream
@@ -20,9 +20,9 @@ ctime
 vector
 -
 VigeneresCipher.h
-C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.h
+C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.h
 
-C:/Users/mason/Documents/Encryption Algorithms/Symmetric/Vigeneres Cipher/VigeneresCipher.h
+C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.h
 iostream
 -
 

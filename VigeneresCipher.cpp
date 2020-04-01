@@ -14,6 +14,7 @@ VigeneresCipher::VigeneresCipher() {
     initTable();
     //generateKey(4, "key.txt");
     generateCipherText("key.txt", "ciphertext.txt", "plaintext.txt");
+    generatePlainText("key.txt", "plaintextgenerated.txt", "ciphertext.txt");
 }
 
 void VigeneresCipher::initTable() {
@@ -51,7 +52,7 @@ void VigeneresCipher::generateKey(int length, string name) {
     ofstream fout(name.c_str());
     assert(fout.is_open());
     for(unsigned i = 0 ; i<length ; i++){
-        fout << (rand()%26) + 1;
+        fout << (rand()%SIZE_OF_ALPHABET) + 1;
         if( i < length -1){fout << ",";}
     }
     fout.close();
@@ -86,7 +87,7 @@ void VigeneresCipher::generateCipherText(string keyname,string outputname, strin
 
     for( unsigned i  = 0 ; i < plaintext.size() ; i++){
         if ( plaintext.at(i) != ' '){
-            cipherText += getCharacter(plaintext.at(i), keyvalues.at(i%keyvalues.size()));
+            cipherText += getCipherCharacter(plaintext.at(i), keyvalues.at(i % keyvalues.size()));
         }
         else{
             cipherText += ' ';
@@ -99,15 +100,65 @@ void VigeneresCipher::generateCipherText(string keyname,string outputname, strin
     fout.close();
 }
 
-char VigeneresCipher::getCharacter(char input, string keyvalue) {
-    cout << "input: " << input << endl << "keyvalue: " << stoi(keyvalue) << endl;
+char VigeneresCipher::getCipherCharacter(char input, string keyvalue) {
+    //cout << "input: " << input << endl << "keyvalue: " << stoi(keyvalue) << endl;
     for ( unsigned column = 1 ; column < WIDTH ; column++){
-        cout << table[stoi(keyvalue) + 1][column] << " " << (char)tolower(input) << endl;
+        //cout << table[stoi(keyvalue) + 1][column] << " " << (char)tolower(input) << endl;
         if( table[stoi(keyvalue) + 1][column][0] == (char)tolower(input)){
-            cout << table[stoi(keyvalue) + 1][column] << " " << to_string(tolower(input)) << endl;
+            //cout << table[stoi(keyvalue) + 1][column] << " " << to_string(tolower(input)) << endl;
             //to access the first item in the array to return a char
             return table[0][column + 1][0];
         }
     }
     return '~';
+}
+
+void VigeneresCipher::generatePlainText(string keyname,string outputname, string inputname) {
+    vector <string> keyvalues;
+    ofstream fout(outputname.c_str());
+    assert(fout.is_open());
+    ifstream keyname_fin(keyname);
+    assert(keyname_fin.is_open());
+    ifstream inputname_fin(inputname);
+    assert(inputname_fin.is_open());
+    string keytext;
+    string cipherText;
+    string plaintext;
+    getline(keyname_fin, keytext);
+    getline(inputname_fin, cipherText);
+
+    //Parse the string into a vector
+    unsigned beginning = 0;
+    unsigned counter = 1;
+    for( unsigned i = 0 ; i < keytext.size() ; i++) {
+        if (keytext.at(i) == ',') {
+            keyvalues.push_back(keytext.substr(beginning, counter - 1));
+            beginning = i + 1;
+            counter = 0;
+        }
+        counter++;
+    }
+    keyvalues.push_back(keytext.substr(beginning, keytext.size()));
+
+    cout << keyvalues[0] << endl;
+    cout << cipherText << endl;
+
+    for( unsigned i  = 0 ; i < cipherText.size() ; i++){
+        if ( cipherText.at(i) != ' '){
+            plaintext += getPlainTextCharacter(cipherText.at(i), keyvalues.at(i % keyvalues.size()));
+            cout << "____________________________________________" << endl;
+        }
+        else{
+            plaintext += ' ';
+        }
+    }
+
+    fout << plaintext << flush;
+
+    keyname_fin.close();
+    fout.close();
+}
+
+char VigeneresCipher::getPlainTextCharacter(char input, string keyvalue) {
+    return toupper(table[stoi(keyvalue)][((int)tolower(input)) + 1 - LOWERCASE_a][0]);
 }
