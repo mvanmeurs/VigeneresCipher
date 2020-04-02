@@ -13,8 +13,10 @@
 VigeneresCipher::VigeneresCipher() {
     initTable();
     //generateKey(4, "key.txt");
-    generateCipherText("key.txt", "ciphertext.txt", "plaintext.txt");
-    generatePlainText("key.txt", "plaintextgenerated.txt", "ciphertext.txt");
+    //generateCipherText("key.txt", "ciphertext.txt", "plaintext.txt");
+    //generatePlainText("key.txt", "plaintextgenerated.txt", "ciphertext.txt");
+    generateText("key.txt", "ciphertext.txt", "plaintext.txt", 1);
+    generateText("key.txt", "plaintextdecrypted.txt", "ciphertext.txt", 0);
 }
 
 void VigeneresCipher::initTable() {
@@ -58,115 +60,69 @@ void VigeneresCipher::generateKey(int length, string name) {
     fout.close();
 }
 
-void VigeneresCipher::generateCipherText(string keyname,string outputname, string inputname) {
+void VigeneresCipher::generateText(string keyname, string outputname, string inputname, bool isGenerateCipherText) {
     vector <string> keyvalues;
-    ofstream fout(outputname.c_str());
-    assert(fout.is_open());
+
+    ofstream outputname_fout(outputname.c_str());
+    assert(outputname_fout.is_open());
     ifstream keyname_fin(keyname);
     assert(keyname_fin.is_open());
     ifstream inputname_fin(inputname);
     assert(inputname_fin.is_open());
-    string keytext;
-    string cipherText;
-    string plaintext;
-    getline(keyname_fin, keytext);
-    getline(inputname_fin, plaintext);
+
+    string key_text;
+    string input_text;
+    string output_text;
+
+    getline(keyname_fin, key_text);
+    getline(inputname_fin, input_text);
+
+    keyname_fin.close();
+    inputname_fin.close();
 
     //Parse the string into a vector
     unsigned beginning = 0;
     unsigned counter = 1;
-    for( unsigned i = 0 ; i < keytext.size() ; i++) {
-        if (keytext.at(i) == ',') {
-            keyvalues.push_back(keytext.substr(beginning, counter - 1));
+    for( unsigned i = 0 ; i < key_text.size() ; i++) {
+        if (key_text.at(i) == ',') {
+            keyvalues.push_back(key_text.substr(beginning, counter - 1));
             beginning = i + 1;
             counter = 0;
         }
         counter++;
     }
-    keyvalues.push_back(keytext.substr(beginning, keytext.size()));
+    keyvalues.push_back(key_text.substr(beginning, key_text.size()));
 
-    for( unsigned i  = 0 ; i < plaintext.size() ; i++){
-        if ( plaintext.at(i) != ' '){
-            cipherText += getCipherCharacter((char)toupper(plaintext.at(i)), keyvalues.at(i % keyvalues.size()));
+    //we iterate through the input text
+    for( unsigned i  = 0 ; i < input_text.size() ; i++){
+        //check if it's a space or not
+        if ( input_text.at(i) != ' '){
+            //if we are generating cipher text, then we append the cipher character to the output text
+            if( isGenerateCipherText){
+                output_text += getCipherCharacter((char)toupper(input_text.at(i)), keyvalues.at(i % keyvalues.size()));
+            }
+            else{
+                output_text += getPlainTextCharacter((char)toupper(input_text.at(i)), keyvalues.at(i % keyvalues.size()));
+            }
         }
         else{
-            cipherText += ' ';
+            output_text += ' ';
         }
     }
 
-    fout << cipherText << flush;
-
-    keyname_fin.close();
-    fout.close();
+    outputname_fout << output_text << flush;
+    outputname_fout.close();
 }
 
-char VigeneresCipher::getCipherCharacter(char input, string keyvalue) {
-//    //cout << "input: " << input << endl << "keyvalue: " << stoi(keyvalue) << endl;
-//    for ( unsigned column = 1 ; column < WIDTH ; column++){
-//        //cout << table[stoi(keyvalue) + 1][column] << " " << (char)tolower(input) << endl;
-//        if( table[stoi(keyvalue) + 1][column][0] == (char)tolower(input)){
-//            //cout << table[stoi(keyvalue) + 1][column] << " " << to_string(tolower(input)) << endl;
-//            //to access the first item in the array to return a char
-//            return table[0][column + 1][0];
-//        }
-//    }
-
+char VigeneresCipher::getCipherCharacter(char input, const string& keyvalue) {
     int index = -stoi(keyvalue) + (int)input - UPPERCASE_A;
-    cout << input << ": " << index << " = " << -stoi(keyvalue) << " + " << (int)input << " - " << UPPERCASE_A << endl;
-
     while(index < 0){
         index += SIZE_OF_ALPHABET;
     }
-    cerr << index << endl;
-    return table[0][index + 1][0];
-
+    return (char)(index + UPPERCASE_A);
 }
 
-void VigeneresCipher::generatePlainText(string keyname,string outputname, string inputname) {
-    vector <string> keyvalues;
-    ofstream fout(outputname.c_str());
-    assert(fout.is_open());
-    ifstream keyname_fin(keyname);
-    assert(keyname_fin.is_open());
-    ifstream inputname_fin(inputname);
-    assert(inputname_fin.is_open());
-    string keytext;
-    string cipherText;
-    string plaintext;
-    getline(keyname_fin, keytext);
-    getline(inputname_fin, cipherText);
-
-    //Parse the string into a vector
-    unsigned beginning = 0;
-    unsigned counter = 1;
-    for( unsigned i = 0 ; i < keytext.size() ; i++) {
-        if (keytext.at(i) == ',') {
-            keyvalues.push_back(keytext.substr(beginning, counter - 1));
-            beginning = i + 1;
-            counter = 0;
-        }
-        counter++;
-    }
-    keyvalues.push_back(keytext.substr(beginning, keytext.size()));
-
-    cout << keyvalues[0] << endl;
-    cout << cipherText << endl;
-
-    for( unsigned i  = 0 ; i < cipherText.size() ; i++){
-        if ( cipherText.at(i) != ' '){
-            plaintext += getPlainTextCharacter((char)toupper(cipherText.at(i)), keyvalues.at(i % keyvalues.size()));
-        }
-        else{
-            plaintext += ' ';
-        }
-    }
-
-    fout << plaintext << flush;
-
-    keyname_fin.close();
-    fout.close();
+char VigeneresCipher::getPlainTextCharacter(char input, const string& keyvalue) {
+    return (char) ( (stoi(keyvalue) + (int)input - UPPERCASE_A) % SIZE_OF_ALPHABET ) + UPPERCASE_A;
 }
 
-char VigeneresCipher::getPlainTextCharacter(char input, string keyvalue) {
-    return toupper(table[stoi(keyvalue)][input + 1 - UPPERCASE_A][0]);
-}

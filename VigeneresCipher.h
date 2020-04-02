@@ -23,10 +23,9 @@ private:
     void printTable();
     void generateKey(int, string);
     //TODO: pass by reference for generateKey?
-    void generateCipherText(string, string, string);
-    char getCipherCharacter(char input, string keyvalue);
-    void generatePlainText(string, string, string);
-    char getPlainTextCharacter(char input, string keyvalue);
+    void generateText(string, string, string, bool);
+    static char getCipherCharacter(char input, const string& keyvalue);
+    static char getPlainTextCharacter(char input, const string& keyvalue);
     string table[HEIGHT][WIDTH];
 };
 
