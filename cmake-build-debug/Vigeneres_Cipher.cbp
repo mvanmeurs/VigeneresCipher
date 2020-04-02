@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/CSchumacker/CLionProjects/VigeneresCipher/Menu.cpp">
+			<Option target="Vigeneres_Cipher"/>
+		</Unit>
+		<Unit filename="C:/Users/CSchumacker/CLionProjects/VigeneresCipher/Menu.h">
+			<Option target="Vigeneres_Cipher"/>
+		</Unit>
 		<Unit filename="C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.cpp">
 			<Option target="Vigeneres_Cipher"/>
 		</Unit>

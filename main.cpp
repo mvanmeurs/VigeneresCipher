@@ -1,10 +1,11 @@
 #include <iostream>
 
 #include "VigeneresCipher.h"
+#include "Menu.h"
 
 using namespace std;
 
 int main() {
-    VigeneresCipher();
+    Menu();
     return 0;
 }

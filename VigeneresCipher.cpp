@@ -35,7 +35,6 @@ void VigeneresCipher::initTable() {
         }
         index++;
     }
-    //printTable();
 }
 
 void VigeneresCipher::printTable() {
@@ -49,9 +48,9 @@ void VigeneresCipher::printTable() {
     }
 }
 
-void VigeneresCipher::generateKey(int length, string name) {
+void VigeneresCipher::generateKey(int length, string keyname) {
     srand((unsigned) time(0));
-    ofstream fout(name.c_str());
+    ofstream fout(keyname.c_str());
     assert(fout.is_open());
     for(unsigned i = 0 ; i<length ; i++){
         fout << (rand()%SIZE_OF_ALPHABET) + 1;
@@ -80,7 +79,6 @@ void VigeneresCipher::generateText(string keyname, string outputname, string inp
     keyname_fin.close();
     inputname_fin.close();
 
-    //Parse the string into a vector
     unsigned beginning = 0;
     unsigned counter = 1;
     for( unsigned i = 0 ; i < key_text.size() ; i++) {
@@ -93,11 +91,8 @@ void VigeneresCipher::generateText(string keyname, string outputname, string inp
     }
     keyvalues.push_back(key_text.substr(beginning, key_text.size()));
 
-    //we iterate through the input text
     for( unsigned i  = 0 ; i < input_text.size() ; i++){
-        //check if it's a space or not
         if ( input_text.at(i) != ' '){
-            //if we are generating cipher text, then we append the cipher character to the output text
             if( isGenerateCipherText){
                 output_text += getCipherCharacter((char)toupper(input_text.at(i)), keyvalues.at(i % keyvalues.size()));
             }
@@ -125,4 +120,3 @@ char VigeneresCipher::getCipherCharacter(char input, const string& keyvalue) {
 char VigeneresCipher::getPlainTextCharacter(char input, const string& keyvalue) {
     return (char) ( (stoi(keyvalue) + (int)input - UPPERCASE_A) % SIZE_OF_ALPHABET ) + UPPERCASE_A;
 }
-

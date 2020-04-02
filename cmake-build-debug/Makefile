@@ -122,6 +122,33 @@ Vigeneres_Cipher/fast:
 	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/build
 .PHONY : Vigeneres_Cipher/fast
 
+Menu.obj: Menu.cpp.obj
+
+.PHONY : Menu.obj
+
+# target to build an object file
+Menu.cpp.obj:
+	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/Menu.cpp.obj
+.PHONY : Menu.cpp.obj
+
+Menu.i: Menu.cpp.i
+
+.PHONY : Menu.i
+
+# target to preprocess a source file
+Menu.cpp.i:
+	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/Menu.cpp.i
+.PHONY : Menu.cpp.i
+
+Menu.s: Menu.cpp.s
+
+.PHONY : Menu.s
+
+# target to generate assembly for a file
+Menu.cpp.s:
+	$(MAKE) -f CMakeFiles\Vigeneres_Cipher.dir\build.make CMakeFiles/Vigeneres_Cipher.dir/Menu.cpp.s
+.PHONY : Menu.cpp.s
+
 VigeneresCipher.obj: VigeneresCipher.cpp.obj
 
 .PHONY : VigeneresCipher.obj
@@ -185,6 +212,9 @@ help:
 	@echo ... Vigeneres_Cipher
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... Menu.obj
+	@echo ... Menu.i
+	@echo ... Menu.s
 	@echo ... VigeneresCipher.obj
 	@echo ... VigeneresCipher.i
 	@echo ... VigeneresCipher.s

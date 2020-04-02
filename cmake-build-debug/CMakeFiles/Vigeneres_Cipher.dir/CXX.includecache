@@ -6,29 +6,19 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.cpp
-iostream
--
+C:/Users/CSchumacker/CLionProjects/VigeneresCipher/Menu.cpp
+Menu.h
+C:/Users/CSchumacker/CLionProjects/VigeneresCipher/Menu.h
 fstream
 -
 cassert
 -
-cstdlib
--
-ctime
+
+C:/Users/CSchumacker/CLionProjects/VigeneresCipher/Menu.h
+iostream
 -
 vector
 -
-VigeneresCipher.h
-C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.h
-
-C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.h
-iostream
+stdexcept
 -
-
-C:/Users/CSchumacker/CLionProjects/VigeneresCipher/main.cpp
-iostream
--
-VigeneresCipher.h
-C:/Users/CSchumacker/CLionProjects/VigeneresCipher/VigeneresCipher.h
 
