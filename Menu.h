@@ -18,9 +18,10 @@ public:
 private:
     void printOptions() const;
     static bool isLegal(const string&);
-    void generateKey(const string& basicString);
+    static void generateKey(const string& basicString);
     static bool isValidFileName(const string&);
     vector<string> extractOperations(const string&);
+    static void checkCommand(const string&);
 };
 
 

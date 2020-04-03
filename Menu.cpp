@@ -15,19 +15,25 @@ Menu::Menu() {
 
     vector<string> operations;
 
+    //check that we have three arguments with no extra spaces in filenames
     do{
         try{
             operations = extractOperations(input);
+            while(true){
+                try{
+                    if(operations[0] != "generatekey" && operations[0] != "generatecipher" && operations[0] != "generateplaintext"){throw 1;}
+                    break;
+                }catch( int num) {
+                    cerr << "Please enter a valid command" << endl;
+                    getline(cin, input);
+                }
+            }
             break;
         }catch( int numspaces) {
             cerr << "Please enter three arguments with a space in between each one." << endl;
             getline(cin, input);
         }
     }while(true);
-
-
-
-
 
     cout << operations[0] << operations[1] << operations[2] << endl;
 }
@@ -45,7 +51,7 @@ bool Menu::isLegal(const string& input) {
     return false;
 }
 
-void Menu::generateKey(const string& basicString) {
+void Menu::generateKey(const string& keyname) {
 
 }
 
@@ -69,4 +75,8 @@ vector<string> Menu::extractOperations(const string& input) {
     if(vector.size() != 3){throw 1;}
     if(vector[0].size() == 0 || vector[1].size() == 0 || vector[2].size() == 0){throw 1;}
     return vector;
+}
+
+void Menu::checkCommand(const string& command) {
+    if(command == "generatekey" || command == "generatecipher" || command == "generateplaintext"){throw 1;}
 }
